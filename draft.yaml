@@ -1,0 +1,49 @@
+models:
+  Departement:
+    nama: string
+    description: string
+    relationships:
+        hasmany: Employee
+
+  Position:
+    name: string
+    description: text
+    relationships:
+        hasmany: Employee
+
+  Employee:
+    Departement_id: foreign
+    Position_id: foreign
+    name: string
+    email: string
+    joined: date
+    status: enum:aktif,tidak aktif default:tidak aktif
+    relationships:
+        hasmany: Leaverequest,sallary
+
+  LeaveRequest:
+      Employee_id: foreign
+      start_date: date
+      end_date: date
+      type: enum:aktif,tidak aktif default:tidak aktif
+      status: enum:pending,accepted,rejected default:pending
+      reason: text nullable
+
+  sallary:
+      Employee_id: foreign
+      amount: double
+      effective_date: date
+
+
+# Buat Rest API
+controllers:
+  Departement:
+    resource: api
+  Position:
+    resource: api
+  Employee:
+    resource: api
+  LeaveRequest:
+    resource: api
+  sallary:
+    resource: api
