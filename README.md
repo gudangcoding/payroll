@@ -162,4 +162,5 @@ selanjutnya akses panelnya
 selanjutnya bisa ke 
 https://filamentphp.com/docs/3.x/panels/installation<br>
 https://blueprint.laravelshift.com/docs/installation/<br>
+https://github.com/filamentphp/filament<br>
 https://www.youtube.com/watch?v=BiH-XUnO2ZQ&list=PLSrCeSrrFkMXFyT7gwBXw9jxSjhGztroA&index=1
