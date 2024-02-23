@@ -6,30 +6,30 @@ Dengan menggunakan laravel blueprint dan filament cukup 5 menit untuk membuat ap
 </p>
 <ol>
 <li>
-1. install laravel pastikan sudah terinstall php dan composer
+ install laravel pastikan sudah terinstall php dan composer
 </li>
 <li>
-2. laravel cli
+ laravel cli
     <pre>composer global require laravel/installer </pre>
     </li>
     <li>
-3. buat proyek baru
+ buat proyek baru
     <pre>laravel new payroll</pre>
     </li>
     <li>
-4. install laravel blueprint
+install laravel blueprint
     <pre>composer require -W --dev laravel-shift/blueprint</pre>
     </li>
     <li>
-5. buka di vscode, buka terminal lalu 
+ buka di vscode, buka terminal lalu 
     <pre>php artisan migrate</pre>
     </li>
     <li>
-6. buat file draft.yaml dengan 
+ buat file draft.yaml dengan 
     <pre>php artisan blueprint:new</pre>
     </li>
     <li>
-7. atur file draft.yamlnya
+atur file draft.yamlnya
 <pre>
     models:
         Departement:
@@ -70,23 +70,23 @@ Dengan menggunakan laravel blueprint dan filament cukup 5 menit untuk membuat ap
 </pre>
 </li>
 <li>
-9. jangan lupa untuk migrate baru
+jangan lupa untuk migrate baru
     <pre>php artisan migrate:fresh --seed</pre>
     </li>
 <li>
-8. <pre>php artisan blueprint:build</pre>
+<pre>php artisan blueprint:build</pre>
 </li>
 <li>
-9. install laravel filament
+ install laravel filament
     <pre>composer require filament/filament:"^3.2" -W</pre>
     </li>
 <li>
-10. buat halaman panel admin
+buat halaman panel admin
     <pre>php artisan filament:install --panels</pre>
     berinama panel
     </li>
 <li>
-11. buat user baru
+ buat user baru
     <pre>php artisan make:filament-user</pre>
     </li>
 <li>
@@ -95,14 +95,71 @@ Dengan menggunakan laravel blueprint dan filament cukup 5 menit untuk membuat ap
     password:123</pre>
     </li>
 <li>
-12. buat filament berdasarkan nama tabel, contoh
+ buat filament berdasarkan nama tabel, contoh
     <pre>php artisan make:filament-resource Departement --generate</pre>
     </li>
+<li>
+    <pre>
+         composer require spatie/laravel-permission<br>
+        'providers' => [
+            // ...
+            Spatie\Permission\PermissionServiceProvider::class,
+        ];
+        php artisan migrate:fresh --seed
+    </pre>
+</li>
+<li>
+Jalanakan perintah publish vendor spatie
+<pre>
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"<br>
+php artisan optimize:clear<br>
+ php artisan migrate
+</pre>
+</li>
+<li>
+    Jalankan perintah update composer
+    <pre>
+        php artisan vendor:publish --tag="filament-spatie-roles-permissions-config" --force
+    </pre>
+</li>
+<li>
+    Install spatie filament
+    <pre>
+    composer require althinect/filament-spatie-roles-permissions<br>
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    </pre>
+</li>
+<li>
+    Tambahkan ini pada admin panel filament<br>
+    App/Filament/AdminPanelProvider.php
+    <pre>
+        use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;<br>
+        $panel
+    ...
+    ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+
+    </pre>
+</li>
+<li>
+    jika ingin membuat customnya maka jalankan perintah ini
+    <pre>
+        php artisan vendor:publish --tag="filament-spatie-roles-permissions-config" --force
+    </pre>
+</li>
+<li>
+Jika ingin membuat formnya bisa multiple seleksi gunakan kode ini
+<pre>
+    return $form->schema([
+    Select::make('roles')->multiple()->relationship('roles', 'name')
+])
+</pre>
+</li>
 </ol>
 <hr/>
 selanjutnya akses panelnya
     http://localhost/panel/login.
 <hr/>
 selanjutnya bisa ke 
-https://filamentphp.com/docs/3.x/panels/installation
-https://blueprint.laravelshift.com/docs/installation/
+https://filamentphp.com/docs/3.x/panels/installation<br>
+https://blueprint.laravelshift.com/docs/installation/<br>
+https://www.youtube.com/watch?v=BiH-XUnO2ZQ&list=PLSrCeSrrFkMXFyT7gwBXw9jxSjhGztroA&index=1

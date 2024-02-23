@@ -31,7 +31,7 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextInput::make('name'),
             ])
             ->filters([
                 //
