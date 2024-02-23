@@ -1,6 +1,9 @@
 ## Laravel Blueprint dan filament
 
 <h1>Stepnya</h1>
+<p>
+Dengan menggunakan laravel blueprint dan filament cukup 5 menit untuk membuat aplikasi payroll
+</p>
 <ol>
 <li>
 1. install laravel pastikan sudah terinstall php dan composer
