@@ -1,5 +1,6 @@
 ## Laravel Blueprint dan filament
 
+<img src="1.png">
 <h1>Stepnya</h1>
 <p>
 Dengan menggunakan laravel blueprint dan filament cukup 5 menit untuk membuat aplikasi payroll
@@ -139,6 +140,7 @@ php artisan optimize:clear<br>
     ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
 
     </pre>
+
 </li>
 <li>
     jika ingin membuat customnya maka jalankan perintah ini
