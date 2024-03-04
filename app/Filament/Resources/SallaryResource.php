@@ -6,9 +6,15 @@ use App\Filament\Resources\SallaryResource\Pages;
 use App\Filament\Resources\SallaryResource\RelationManagers;
 use App\Models\Sallary;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Number;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,14 +29,19 @@ class SallaryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('Employee_id')
-                    ->relationship('Employee', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('amount')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DatePicker::make('effective_date')
-                    ->required(),
+                Card::make([
+                    Select::make('employee_id')
+                        ->label('Employee')
+                        ->options(\App\Models\Employee::pluck('name', 'id')->toArray())
+                        ->required(),
+
+                    TextInput::make('amount')
+                        ->type('number'),
+
+                    Datepicker::make('effective_date')
+                        ->label('Effective Date')
+                        ->required(),
+                ])
             ]);
     }
 
@@ -38,20 +49,20 @@ class SallaryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('Employee.id')
+                TextColumn::make('Employee.id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('amount')
+                TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('effective_date')
+                TextColumn::make('effective_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

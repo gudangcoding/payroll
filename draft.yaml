@@ -1,15 +1,15 @@
 models:
   Departement:
-    nama: string
+    name: string
     description: string
     relationships:
-        hasmany: Employee
+      hasmany: Employee
 
   Position:
     name: string
     description: text
     relationships:
-        hasmany: Employee
+      hasmany: Employee
 
   Employee:
     Departement_id: foreign
@@ -19,21 +19,20 @@ models:
     joined: date
     status: enum:aktif,tidak aktif default:tidak aktif
     relationships:
-        hasmany: Leaverequest,sallary
+      hasmany: Leaverequest,sallary
 
   LeaveRequest:
-      Employee_id: foreign
-      start_date: date
-      end_date: date
-      type: enum:aktif,tidak aktif default:tidak aktif
-      status: enum:pending,accepted,rejected default:pending
-      reason: text nullable
+    Employee_id: foreign
+    start_date: date
+    end_date: date
+    type: enum:aktif,tidak aktif default:tidak aktif
+    status: enum:pending,accepted,rejected default:pending
+    reason: text nullable
 
   sallary:
-      Employee_id: foreign
-      amount: double
-      effective_date: date
-
+    Employee_id: foreign
+    amount: double
+    effective_date: date
 
 # Buat Rest API
 controllers:

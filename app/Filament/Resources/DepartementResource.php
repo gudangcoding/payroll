@@ -6,6 +6,8 @@ use App\Filament\Resources\DepartementResource\Pages;
 use App\Filament\Resources\DepartementResource\RelationManagers;
 use App\Models\Departement;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,13 +25,14 @@ class DepartementResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
-            ]);
+                Card::make()->schema([
+
+                    TextInput::make('nama'),
+                    TextInput::make('description')
+                ])
+
+
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

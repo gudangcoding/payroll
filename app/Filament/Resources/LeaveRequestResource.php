@@ -7,6 +7,11 @@ use App\Filament\Resources\LeaveRequestResource\RelationManagers;
 use App\Models\LeaveRequest;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,7 +28,36 @@ class LeaveRequestResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()
+                    ->schema([
+                        Select::make('employee_id')
+                            ->label('Employee')
+                            ->options(\App\Models\Employee::pluck('name', 'id')->toArray())
+                            ->required(),
+
+                        DatePicker::make('start_date')
+                            ->label('Start Date')
+                            ->required(),
+
+                        Datepicker::make('end_date')
+                            ->label('End Date')
+                            ->required(),
+
+                        Select::make('type')
+                            ->label('Type')
+                            ->options(['aktif' => 'Aktif', 'tidak aktif' => 'Tidak Aktif'])
+                            ->default('tidak aktif')
+                            ->required(),
+
+                        Select::make('status')
+                            ->label('Status')
+                            ->options(['pending' => 'Pending', 'accepted' => 'Accepted', 'rejected' => 'Rejected'])
+                            ->default('pending'),
+
+                        Textarea::make('reason')
+                            ->label('Reason')
+                            ->nullable(),
+                    ])->columns(2),
             ]);
     }
 
